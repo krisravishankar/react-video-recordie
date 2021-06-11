@@ -1,12 +1,18 @@
 import Button from '@material-ui/core/Button';
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import StopIcon from '@material-ui/icons/Stop';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 export type VideoRecordPropType = {
   onRecord?: () => {};
   onStop?: () => {};
   onPlay?: () => {};
   onPause?: () => {};
+  timeslice?: number;
 };
 
 export function VideoRecorder({
@@ -14,6 +20,7 @@ export function VideoRecorder({
   onStop,
   onPause,
   onPlay,
+  timeslice,
 }: VideoRecordPropType) {
   const video = useRef<HTMLVideoElement>(null);
   const videoPlayer = useRef<HTMLVideoElement>(null);
@@ -22,7 +29,7 @@ export function VideoRecorder({
   let mediaRecorder: MediaRecorder;
 
   const record = () => {
-    mediaRecorder.start();
+    mediaRecorder.start(timeslice || 1000);
 
     if (onRecord) {
       onRecord();
@@ -116,35 +123,35 @@ export function VideoRecorder({
             record();
           }}
         >
-          Record
+          <FiberManualRecordIcon />
         </Button>
         <Button
           onClick={() => {
             stop();
           }}
         >
-          Stop
+          <StopIcon />
         </Button>
         <Button
           onClick={() => {
             pause();
           }}
         >
-          Pause
+          <PauseCircleFilledIcon />
         </Button>
         <Button
           onClick={() => {
             download();
           }}
         >
-          Download
+          <GetAppIcon />
         </Button>
         <Button
           onClick={() => {
             play();
           }}
         >
-          Play
+          <PlayCircleFilledIcon />
         </Button>
       </div>
       <video ref={videoPlayer} playsInline muted></video>
