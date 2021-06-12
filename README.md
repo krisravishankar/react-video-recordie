@@ -27,8 +27,7 @@ Check out the [Storybook](https://react-video-recordie.netlify.app) for a demo.
 ```tsx
 import React, { Component } from 'react';
 
-import VideoRecordie from 'react-video-recordie';
-import 'react-video-recordie/dist/index.css';
+import { VideoRecordie } from 'react-video-recordie';
 
 class Example extends Component {
   render() {
