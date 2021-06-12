@@ -9,7 +9,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
 
-export type VideoRecordPropType = {
+export type VideoRecordiePropsType = {
   onRecord?: () => {};
   onStop?: () => {};
   onPlay?: () => {};
@@ -29,7 +29,7 @@ export enum VideoRecorderStateEnum {
   error,
 }
 
-export function VideoRecorder({
+export function VideoRecordie({
   onRecord,
   onStop,
   onPause,
@@ -38,7 +38,7 @@ export function VideoRecorder({
   timeslice,
   filename,
   allowDownload = true,
-}: VideoRecordPropType) {
+}: VideoRecordiePropsType) {
   const classes = useStyles();
   const videoElement = useRef<HTMLVideoElement>(null);
   const chunks = useRef<Blob[]>([]);
@@ -183,7 +183,7 @@ export function VideoRecorder({
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       {videoRecorderState === VideoRecorderStateEnum.unsupported && (
         <div className={classes.error}>
           This feature is not supported on your browser :(
@@ -261,7 +261,7 @@ export function VideoRecorder({
           </Button>
         )}
       </div>
-    </>
+    </React.Fragment>
   );
 }
 

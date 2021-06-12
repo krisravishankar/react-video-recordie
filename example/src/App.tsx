@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ExampleComponent } from 'react-video-recorder'
-import 'react-video-recorder/dist/index.css'
+import { ExampleComponent } from 'react-video-recordie'
+import 'react-video-recordie/dist/index.css'
 
 const App = () => {
   return <ExampleComponent text="Create React Library Example 😄" />
