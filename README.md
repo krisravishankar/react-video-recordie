@@ -2,7 +2,7 @@
 
 > Video Recorder in React using MediaRecorder API
 
-[![NPM](https://img.shields.io/npm/v/react-video-recordie.svg)](https://www.npmjs.com/package/react-video-recordie) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-video-recordie.svg)](https://www.npmjs.com/package/react-video-recordie) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/6ab428ac-c45a-4938-974a-6f8b9a3f9af4/deploy-status)](https://app.netlify.com/sites/react-video-recordie/deploys)
 
 ## Install
 

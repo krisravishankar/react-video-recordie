@@ -1,5 +1,6 @@
 build/
 dist/
+storybook-static/
 node_modules/
 .snapshots/
 *.min.js
