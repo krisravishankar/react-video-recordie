@@ -15,6 +15,7 @@ export type VideoRecordPropType = {
   onPlay?: () => {};
   onPause?: () => {};
   onResume?: () => {};
+  allowDownload?: boolean;
   timeslice?: number;
   filename?: string;
 };
@@ -36,6 +37,7 @@ export function VideoRecorder({
   onResume,
   timeslice,
   filename,
+  allowDownload = true,
 }: VideoRecordPropType) {
   const classes = useStyles();
   const videoElement = useRef<HTMLVideoElement>(null);
@@ -221,15 +223,16 @@ export function VideoRecorder({
             <VideocamOutlinedIcon />
           </Button>
         )}
-        {videoRecorderState === VideoRecorderStateEnum.inactive && (
-          <Button
-            onClick={() => {
-              download();
-            }}
-          >
-            <GetAppIcon />
-          </Button>
-        )}
+        {allowDownload &&
+          videoRecorderState === VideoRecorderStateEnum.inactive && (
+            <Button
+              onClick={() => {
+                download();
+              }}
+            >
+              <GetAppIcon />
+            </Button>
+          )}
         {videoRecorderState === VideoRecorderStateEnum.inactive && (
           <Button
             onClick={() => {
