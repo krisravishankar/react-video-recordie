@@ -171,7 +171,7 @@ export function VideoRecordie({
           };
           const mediaRecorder = new MediaRecorder(stream, options);
           mediaRecorder.onstart = onMediaRecorderStart;
-          mediaRecorder.onrecord = onMediaRecorderStop;
+          mediaRecorder.onstop = onMediaRecorderStop;
           mediaRecorder.onpause = onMediaRecorderPause;
           mediaRecorder.onresume = onMediaRecorderResume;
           mediaRecorder.onerror = onMediaRecorderError;
