@@ -42,46 +42,55 @@ class Example extends Component {
 ##### onRecordingStart
 
 A callback function that will be invoked when recording begins
+
 type: `() => void`
 
 ##### onRecordingComplete
 
 A callback function that will be invoked when recording ends
-type: `(video: Blob, videoUrl) => void`
+
+type: `(video: Blob, videoUrl: string) => void`
 
 ##### onPlay
 
 A callback function that will be invoked when the recorded video is played
+
 type: `() => void`
 
 ##### onPause
 
 A callback function that will be invoked when the recording is paused
+
 type: `() => void`
 
 ##### onResume
 
 A callback function that will be invoked when the paused recording is resumed
+
 type: `() => void`
 
 ##### mimeType
 
 The MIME media type required for your video, defaults to 'video/webm'
+
 type: `string`
 
 ##### allowDownload
 
 A boolean to enable or disable the ability to download the recorded video
+
 type: `boolean`
 
 ##### filename
 
 The name of the downloaded file, defaults to 'videorecordie.webm'
+
 type: `string`
 
 ##### timeslice
 
 The number of milliseconds to record into each blob, defaults to 1000 milliseconds
+
 type: `number`
 
 ## License
