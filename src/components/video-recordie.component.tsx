@@ -11,7 +11,7 @@ import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
 
 export type VideoRecordiePropsType = {
   onRecordingStart?: Function;
-  onRecordingComplete?: (blob: Blob) => void;
+  onRecordingComplete?: (video: Blob, videoUrl: string) => void;
   onPlay?: Function;
   onPause?: Function;
   onResume?: Function;
@@ -98,7 +98,7 @@ export function VideoRecordie({
     setVideoRecorderState(VideoRecorderStateEnum.inactive);
 
     if (onRecordingComplete) {
-      onRecordingComplete(blob);
+      onRecordingComplete(blob, videoUrl);
     }
   };
 
