@@ -1,3 +1,7 @@
-import { VideoRecordie } from './components/video-recordie.component';
+import {
+  VideoRecordie,
+  VideoRecordiePropsType,
+} from './components/video-recordie.component';
 
-export default VideoRecordie;
+export { VideoRecordie };
+export { VideoRecordiePropsType };
