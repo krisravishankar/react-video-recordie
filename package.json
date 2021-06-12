@@ -5,6 +5,10 @@
   "author": "krisravishankar",
   "license": "MIT",
   "repository": "krisravishankar/react-video-recordie",
+  "homepage": "https://github.com/krisravishankar/react-video-recordie",
+  "bugs": {
+    "url": "https://github.com/krisravishankar/react-video-recordie/issues"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",

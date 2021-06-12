@@ -10,6 +10,10 @@
 npm install --save react-video-recordie
 ```
 
+## Demo
+
+Check out the [Storybook](https://react-video-recordie.netlify.app) for a demo.
+
 ## Usage
 
 ```tsx
