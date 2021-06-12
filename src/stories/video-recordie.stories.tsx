@@ -12,6 +12,7 @@ export default {
   component: VideoRecordie,
   argTypes: {
     mimeType: { control: 'text' },
+    allowPlayback: { control: 'boolean' },
     allowDownload: { control: 'boolean' },
     filename: { control: 'text' },
     timeslice: { control: 'number' },

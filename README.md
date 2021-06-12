@@ -74,6 +74,12 @@ The MIME media type required for your video, defaults to 'video/webm'
 
 type: `string`
 
+##### allowPlayback
+
+A boolean to enable or disable the ability to replay the recorded video
+
+type: `boolean`
+
 ##### allowDownload
 
 A boolean to enable or disable the ability to download the recorded video

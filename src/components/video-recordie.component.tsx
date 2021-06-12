@@ -16,6 +16,7 @@ export type VideoRecordiePropsType = {
   onPause?: Function;
   onResume?: Function;
   mimeType?: string;
+  allowPlayback?: boolean;
   allowDownload?: boolean;
   filename?: string;
   timeslice?: number;
@@ -40,6 +41,7 @@ export function VideoRecordie({
   timeslice,
   filename,
   allowDownload = true,
+  allowPlayback = true,
 }: VideoRecordiePropsType) {
   const defaultMimeType = 'video/webm';
   const classes = useStyles();
@@ -264,15 +266,16 @@ export function VideoRecordie({
               <GetAppIcon />
             </Button>
           )}
-        {videoRecorderState === VideoRecorderStateEnum.inactive && (
-          <Button
-            onClick={() => {
-              play();
-            }}
-          >
-            <PlayCircleFilledIcon />
-          </Button>
-        )}
+        {allowPlayback &&
+          videoRecorderState === VideoRecorderStateEnum.inactive && (
+            <Button
+              onClick={() => {
+                play();
+              }}
+            >
+              <PlayCircleFilledIcon />
+            </Button>
+          )}
       </div>
     </React.Fragment>
   );
