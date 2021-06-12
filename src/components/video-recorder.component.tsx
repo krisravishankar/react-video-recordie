@@ -22,11 +22,11 @@ export type VideoRecordPropType = {
 
 export enum VideoRecorderStateEnum {
   initial,
-  ready,
   recording,
   inactive,
   paused,
   unsupported,
+  error,
 }
 
 export function VideoRecorder({
@@ -130,6 +130,10 @@ export function VideoRecorder({
     }
   };
 
+  const onMediaRecorderError = () => {
+    setVideoRecorderState(VideoRecorderStateEnum.error);
+  };
+
   const download = () => {
     const a = document.createElement('a');
     a.style.display = 'none';
@@ -157,6 +161,7 @@ export function VideoRecorder({
           mediaRecorder.onstop = onMediaRecorderStop;
           mediaRecorder.onpause = onMediaRecorderPause;
           mediaRecorder.onresume = onMediaRecorderResume;
+          mediaRecorder.onerror = onMediaRecorderError;
           mediaRecorder.ondataavailable = function (e) {
             chunks.current.push(e.data);
           };
@@ -168,15 +173,28 @@ export function VideoRecorder({
           }
         })
         .catch(function (err) {
+          setVideoRecorderState(VideoRecorderStateEnum.error);
           console.log('The following getUserMedia error occurred: ' + err);
         });
     } else {
+      setVideoRecorderState(VideoRecorderStateEnum.unsupported);
       console.log('getUserMedia not supported on your browser!');
     }
   }, []);
 
   return (
     <>
+      {videoRecorderState === VideoRecorderStateEnum.unsupported && (
+        <div className={classes.error}>
+          This feature is not supported on your browser :(
+        </div>
+      )}
+      {videoRecorderState === VideoRecorderStateEnum.error && (
+        <div className={classes.error}>
+          Oops, there was an error while recording video. Make sure you have
+          permissions to access the camera.
+        </div>
+      )}
       <video
         className={classes.videoRecorder}
         ref={videoElement}
@@ -253,5 +271,11 @@ const useStyles = makeStyles({
   },
   toolbar: {
     textAlign: 'center',
+  },
+  error: {
+    padding: 10,
+    borderRadius: 5,
+    color: 'rgb(97, 26, 21)',
+    backgroundColor: 'rgb(253, 236, 234)',
   },
 });
