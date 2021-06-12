@@ -11,14 +11,20 @@ export default {
   title: 'React Video Recordie/VideoRecordie',
   component: VideoRecordie,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    mimeType: { control: 'text' },
+    allowDownload: { control: 'boolean' },
+    filename: { control: 'text' },
+    timeslice: { control: 'number' },
+    onRecordingStart: { control: false },
+    onRecordingComplete: { control: false },
+    onPlay: { control: false },
+    onPause: { control: false },
+    onResume: { control: false },
   },
 } as Meta;
 
-const Template: Story<VideoRecordiePropsType> = () => <VideoRecordie />;
+const Template: Story<VideoRecordiePropsType> = (args) => (
+  <VideoRecordie {...args} />
+);
 
 export const Default = Template.bind({});
-Default.args = {
-  primary: true,
-  label: 'Button',
-};

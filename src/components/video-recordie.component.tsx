@@ -10,15 +10,15 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
 
 export type VideoRecordiePropsType = {
-  onRecord?: () => {};
-  onStop?: () => {};
-  onPlay?: () => {};
-  onPause?: () => {};
-  onResume?: () => {};
+  onRecordingStart?: Function;
+  onRecordingComplete?: (blob: Blob) => void;
+  onPlay?: Function;
+  onPause?: Function;
+  onResume?: Function;
   mimeType?: string;
   allowDownload?: boolean;
-  timeslice?: number;
   filename?: string;
+  timeslice?: number;
 };
 
 export enum VideoRecorderStateEnum {
@@ -31,8 +31,8 @@ export enum VideoRecorderStateEnum {
 }
 
 export function VideoRecordie({
-  onRecord,
-  onStop,
+  onRecordingStart,
+  onRecordingComplete,
   onPause,
   onPlay,
   onResume,
@@ -71,8 +71,8 @@ export function VideoRecordie({
   const onMediaRecorderStart = () => {
     setVideoRecorderState(VideoRecorderStateEnum.recording);
 
-    if (onRecord) {
-      onRecord();
+    if (onRecordingStart) {
+      onRecordingStart();
     }
   };
 
@@ -97,8 +97,8 @@ export function VideoRecordie({
 
     setVideoRecorderState(VideoRecorderStateEnum.inactive);
 
-    if (onStop) {
-      onStop();
+    if (onRecordingComplete) {
+      onRecordingComplete(blob);
     }
   };
 
@@ -171,7 +171,7 @@ export function VideoRecordie({
           };
           const mediaRecorder = new MediaRecorder(stream, options);
           mediaRecorder.onstart = onMediaRecorderStart;
-          mediaRecorder.onstop = onMediaRecorderStop;
+          mediaRecorder.onRecordingComplete = onMediaRecorderStop;
           mediaRecorder.onpause = onMediaRecorderPause;
           mediaRecorder.onresume = onMediaRecorderResume;
           mediaRecorder.onerror = onMediaRecorderError;
@@ -185,7 +185,7 @@ export function VideoRecordie({
             videoElement.current.play();
           }
         })
-        .catch(function (err) {
+        .catch(function () {
           setVideoRecorderState(VideoRecorderStateEnum.error);
         });
     } else {
