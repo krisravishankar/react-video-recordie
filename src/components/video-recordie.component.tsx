@@ -15,6 +15,7 @@ export type VideoRecordiePropsType = {
   onPlay?: () => {};
   onPause?: () => {};
   onResume?: () => {};
+  mimeType?: string;
   allowDownload?: boolean;
   timeslice?: number;
   filename?: string;
@@ -35,10 +36,12 @@ export function VideoRecordie({
   onPause,
   onPlay,
   onResume,
+  mimeType,
   timeslice,
   filename,
   allowDownload = true,
 }: VideoRecordiePropsType) {
+  const defaultMimeType = 'video/webm';
   const classes = useStyles();
   const videoElement = useRef<HTMLVideoElement>(null);
   const chunks = useRef<Blob[]>([]);
@@ -47,10 +50,17 @@ export function VideoRecordie({
   const [videoRecorderState, setVideoRecorderState] =
     useState<VideoRecorderStateEnum>(VideoRecorderStateEnum.initial);
 
+  const getMimeType = (): string => {
+    return mimeType && MediaRecorder && MediaRecorder.isTypeSupported(mimeType)
+      ? mimeType
+      : defaultMimeType;
+  };
+
   const record = () => {
     if (mediaRecorder) {
       if (videoElement.current) {
         videoElement.current.srcObject = mediaRecorder.stream;
+        videoElement.current.muted = true;
         videoElement.current.play();
       }
 
@@ -73,7 +83,7 @@ export function VideoRecordie({
   };
 
   const onMediaRecorderStop = () => {
-    const blob = new Blob(chunks.current, { type: 'video/webm' });
+    const blob = new Blob(chunks.current, { type: getMimeType() });
     const videoUrl = window.URL.createObjectURL(blob);
     setVideoUrl(videoUrl);
 
@@ -122,6 +132,7 @@ export function VideoRecordie({
 
   const play = () => {
     if (videoElement && videoElement.current) {
+      videoElement.current.muted = false;
       videoElement.current.play();
     }
 
@@ -138,7 +149,7 @@ export function VideoRecordie({
     const a = document.createElement('a');
     a.style.display = 'none';
     a.href = videoUrl;
-    a.download = filename || 'videorecorder.webm';
+    a.download = filename || 'videorecordie.webm';
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {
@@ -149,14 +160,16 @@ export function VideoRecordie({
 
   useEffect(() => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      console.log('getUserMedia supported.');
       navigator.mediaDevices
         .getUserMedia({
           audio: true,
           video: true,
         })
         .then(function (stream) {
-          const mediaRecorder = new MediaRecorder(stream);
+          const options = {
+            mimeType: getMimeType(),
+          };
+          const mediaRecorder = new MediaRecorder(stream, options);
           mediaRecorder.onstart = onMediaRecorderStart;
           mediaRecorder.onstop = onMediaRecorderStop;
           mediaRecorder.onpause = onMediaRecorderPause;
@@ -174,11 +187,9 @@ export function VideoRecordie({
         })
         .catch(function (err) {
           setVideoRecorderState(VideoRecorderStateEnum.error);
-          console.log('The following getUserMedia error occurred: ' + err);
         });
     } else {
       setVideoRecorderState(VideoRecorderStateEnum.unsupported);
-      console.log('getUserMedia not supported on your browser!');
     }
   }, []);
 
