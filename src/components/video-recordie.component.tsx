@@ -49,6 +49,7 @@ export function VideoRecordie({
   const [videoUrl, setVideoUrl] = useState<string>('');
   const [videoRecorderState, setVideoRecorderState] =
     useState<VideoRecorderStateEnum>(VideoRecorderStateEnum.initial);
+  const [error, setError] = useState<string>('');
 
   const getMimeType = (): string => {
     return mimeType && MediaRecorder && MediaRecorder.isTypeSupported(mimeType)
@@ -141,8 +142,9 @@ export function VideoRecordie({
     }
   };
 
-  const onMediaRecorderError = () => {
+  const onMediaRecorderError = (event: MediaRecorderErrorEvent) => {
     setVideoRecorderState(VideoRecorderStateEnum.error);
+    setError(event.error.name);
   };
 
   const download = () => {
@@ -185,8 +187,9 @@ export function VideoRecordie({
             videoElement.current.play();
           }
         })
-        .catch(function () {
+        .catch(function (err) {
           setVideoRecorderState(VideoRecorderStateEnum.error);
+          setError(err);
         });
     } else {
       setVideoRecorderState(VideoRecorderStateEnum.unsupported);
@@ -202,8 +205,7 @@ export function VideoRecordie({
       )}
       {videoRecorderState === VideoRecorderStateEnum.error && (
         <div className={classes.error}>
-          Oops, there was an error while recording video. Make sure you have
-          permissions to access the camera.
+          {`Oops, there was an error while recording video. ${error}`}
         </div>
       )}
       <video
