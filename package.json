@@ -1,6 +1,6 @@
 {
   "name": "react-video-recordie",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Video Recorder in React using MediaRecorder API",
   "author": "krisravishankar",
   "license": "MIT",
