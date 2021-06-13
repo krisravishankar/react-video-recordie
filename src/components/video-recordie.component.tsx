@@ -2,12 +2,11 @@ import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import StopIcon from '@material-ui/icons/Stop';
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import VideocamIcon from '@material-ui/icons/Videocam';
-import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
+import { VideoIcon } from './icons/video-icon.component';
+import { PlayIcon } from './icons/play-icon.component';
+import { PauseIcon } from './icons/pause-icon.component';
+import { StopIcon } from './icons/stop-icon.component';
+import { DownloadIcon } from './icons/download-icon.component';
 
 export type VideoRecordiePropsType = {
   onRecordingStart?: Function;
@@ -225,7 +224,7 @@ export function VideoRecordie({
               record();
             }}
           >
-            <VideocamIcon />
+            <VideoIcon />
           </Button>
         )}
         {(videoRecorderState === VideoRecorderStateEnum.recording ||
@@ -244,7 +243,7 @@ export function VideoRecordie({
               pause();
             }}
           >
-            <PauseCircleFilledIcon />
+            <PauseIcon />
           </Button>
         )}
         {videoRecorderState === VideoRecorderStateEnum.paused && (
@@ -253,7 +252,7 @@ export function VideoRecordie({
               resume();
             }}
           >
-            <VideocamOutlinedIcon />
+            <VideoIcon />
           </Button>
         )}
         {allowDownload &&
@@ -263,7 +262,7 @@ export function VideoRecordie({
                 download();
               }}
             >
-              <GetAppIcon />
+              <DownloadIcon />
             </Button>
           )}
         {allowPlayback &&
@@ -273,7 +272,7 @@ export function VideoRecordie({
                 play();
               }}
             >
-              <PlayCircleFilledIcon />
+              <PlayIcon />
             </Button>
           )}
       </div>
