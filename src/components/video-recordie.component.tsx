@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import * as styles from './video-recordie.styles';
 import { VideoIcon } from './icons/video-icon.component';
 import { PlayIcon } from './icons/play-icon.component';
 import { PauseIcon } from './icons/pause-icon.component';
@@ -43,7 +42,6 @@ export function VideoRecordie({
   allowPlayback = true,
 }: VideoRecordiePropsType) {
   const defaultMimeType = 'video/webm';
-  const classes = useStyles();
   const videoElement = useRef<HTMLVideoElement>(null);
   const chunks = useRef<Blob[]>([]);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>();
@@ -200,97 +198,88 @@ export function VideoRecordie({
   return (
     <React.Fragment>
       {videoRecorderState === VideoRecorderStateEnum.unsupported && (
-        <div className={classes.error}>
+        <div style={styles.error}>
           This feature is not supported on your browser :(
         </div>
       )}
       {videoRecorderState === VideoRecorderStateEnum.error && (
-        <div className={classes.error}>
+        <div style={styles.error}>
           {`Oops, there was an error while recording video. ${error}`}
         </div>
       )}
       <video
-        className={classes.videoRecorder}
+        style={styles.videoRecorder}
         ref={videoElement}
         playsInline
         autoPlay
         muted
       ></video>
-      <div className={classes.toolbar}>
+      <div style={styles.toolbar}>
         {(videoRecorderState === VideoRecorderStateEnum.initial ||
           videoRecorderState === VideoRecorderStateEnum.inactive) && (
-          <Button
+          <button
+            style={styles.button}
             onClick={() => {
               record();
             }}
           >
             <VideoIcon />
-          </Button>
+          </button>
         )}
         {(videoRecorderState === VideoRecorderStateEnum.recording ||
           videoRecorderState === VideoRecorderStateEnum.paused) && (
-          <Button
+          <button
+            style={styles.button}
             onClick={() => {
               stop();
             }}
           >
             <StopIcon />
-          </Button>
+          </button>
         )}
         {videoRecorderState === VideoRecorderStateEnum.recording && (
-          <Button
+          <button
+            style={styles.button}
             onClick={() => {
               pause();
             }}
           >
             <PauseIcon />
-          </Button>
+          </button>
         )}
         {videoRecorderState === VideoRecorderStateEnum.paused && (
-          <Button
+          <button
+            style={styles.button}
             onClick={() => {
               resume();
             }}
           >
             <VideoIcon />
-          </Button>
+          </button>
         )}
         {allowDownload &&
           videoRecorderState === VideoRecorderStateEnum.inactive && (
-            <Button
+            <button
+              style={styles.button}
               onClick={() => {
                 download();
               }}
             >
               <DownloadIcon />
-            </Button>
+            </button>
           )}
         {allowPlayback &&
           videoRecorderState === VideoRecorderStateEnum.inactive && (
-            <Button
+            <button
+              style={styles.button}
               onClick={() => {
                 play();
               }}
             >
               <PlayIcon />
-            </Button>
+            </button>
           )}
       </div>
     </React.Fragment>
   );
 }
-
-const useStyles = makeStyles({
-  videoRecorder: {
-    width: '100%',
-  },
-  toolbar: {
-    textAlign: 'center',
-  },
-  error: {
-    padding: 10,
-    borderRadius: 5,
-    color: 'rgb(97, 26, 21)',
-    backgroundColor: 'rgb(253, 236, 234)',
-  },
-});
