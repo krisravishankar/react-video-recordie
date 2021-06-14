@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import './video-recordie.css';
+import styles from './video-recordie.stories.module.css';
 
 import {
   VideoRecordie,
@@ -25,7 +25,9 @@ export default {
 } as Meta;
 
 const Template: Story<VideoRecordiePropsType> = (args) => (
-  <VideoRecordie {...args} />
+  <div className={styles.storybookContainer}>
+    <VideoRecordie {...args} />
+  </div>
 );
 
 export const Default = Template.bind({});

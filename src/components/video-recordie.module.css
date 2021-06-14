@@ -1,0 +1,28 @@
+.videoRecorder {
+  width: 100%;
+}
+
+.toolbar {
+  text-align: center;
+}
+
+.error {
+  padding: 10px;
+  border-radius: 5px;
+  color: rgb(97, 26, 21);
+  background-color: rgb(253, 236, 234);
+}
+
+.button {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}

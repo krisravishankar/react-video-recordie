@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
-import * as styles from './video-recordie.styles';
+import styles from './video-recordie.module.css';
 import { VideoIcon } from './icons/video-icon.component';
 import { PlayIcon } from './icons/play-icon.component';
 import { PauseIcon } from './icons/pause-icon.component';
@@ -198,27 +198,27 @@ export function VideoRecordie({
   return (
     <React.Fragment>
       {videoRecorderState === VideoRecorderStateEnum.unsupported && (
-        <div style={styles.error}>
+        <div className={styles.error}>
           This feature is not supported on your browser :(
         </div>
       )}
       {videoRecorderState === VideoRecorderStateEnum.error && (
-        <div style={styles.error}>
+        <div className={styles.error}>
           {`Oops, there was an error while recording video. ${error}`}
         </div>
       )}
       <video
-        style={styles.videoRecorder}
+        className={styles.videoRecorder}
         ref={videoElement}
         playsInline
         autoPlay
         muted
       ></video>
-      <div style={styles.toolbar}>
+      <div className={styles.toolbar}>
         {(videoRecorderState === VideoRecorderStateEnum.initial ||
           videoRecorderState === VideoRecorderStateEnum.inactive) && (
           <button
-            style={styles.button}
+            className={styles.button}
             onClick={() => {
               record();
             }}
@@ -229,7 +229,7 @@ export function VideoRecordie({
         {(videoRecorderState === VideoRecorderStateEnum.recording ||
           videoRecorderState === VideoRecorderStateEnum.paused) && (
           <button
-            style={styles.button}
+            className={styles.button}
             onClick={() => {
               stop();
             }}
@@ -239,7 +239,7 @@ export function VideoRecordie({
         )}
         {videoRecorderState === VideoRecorderStateEnum.recording && (
           <button
-            style={styles.button}
+            className={styles.button}
             onClick={() => {
               pause();
             }}
@@ -249,7 +249,7 @@ export function VideoRecordie({
         )}
         {videoRecorderState === VideoRecorderStateEnum.paused && (
           <button
-            style={styles.button}
+            className={styles.button}
             onClick={() => {
               resume();
             }}
@@ -260,7 +260,7 @@ export function VideoRecordie({
         {allowDownload &&
           videoRecorderState === VideoRecorderStateEnum.inactive && (
             <button
-              style={styles.button}
+              className={styles.button}
               onClick={() => {
                 download();
               }}
@@ -271,7 +271,7 @@ export function VideoRecordie({
         {allowPlayback &&
           videoRecorderState === VideoRecorderStateEnum.inactive && (
             <button
-              style={styles.button}
+              className={styles.button}
               onClick={() => {
                 play();
               }}
