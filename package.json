@@ -1,6 +1,6 @@
 {
   "name": "react-video-recordie",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Video Recorder in React using MediaRecorder API",
   "author": "krisravishankar",
   "license": "MIT",
@@ -9,6 +9,19 @@
   "bugs": {
     "url": "https://github.com/krisravishankar/react-video-recordie/issues"
   },
+  "keywords": [
+    "react",
+    "video",
+    "recorder",
+    "recording",
+    "video recorder",
+    "video recording",
+    "media recording",
+    "getusermedia",
+    "MediaRecorder",
+    "react video recorder",
+    "react video recording"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
